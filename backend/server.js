@@ -1,5 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const cors = require("cors");
 const session = require("express-session");
 const passport = require("./config/passport");
 
@@ -13,6 +14,16 @@ const hospitalRoutes = require("./routes/hospitalRoutes");
 dotenv.config();
 
 const app = express();
+
+app.use(
+    cors({
+        origin: [
+            "http://localhost:5173",
+            "https://hospital-api-frontend.vercel.app"
+        ],
+        credentials: true
+    })
+);
 
 // Connect MongoDB
 connectDB();
